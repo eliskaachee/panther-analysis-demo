@@ -1,0 +1,50 @@
+# Make sure to use camelCase when naming the schema or log type
+name: Custom Log Test Name
+logType: Custom.SampleLog.V1
+input: |
+  {
+    "method": "GET",
+    "path": "/-/metrics",
+    "format": "html",
+    "controller": "MetricsController",
+    "action": "index",
+    "status": 200,
+    "params": [],
+    "remote_ip": "1.1.1.1",
+    "user_id": null,
+    "username": null,
+    "ua": null,
+    "queue_duration_s": null,
+    "correlation_id": "c01ce2c1-d9e3-4e69-bfa3-b27e50af0268",
+    "cpu_s": 0.05,
+    "db_duration_s": 0,
+    "view_duration_s": 0.00039,
+    "duration_s": 0.0459,
+    "tag": "test",
+    "time": "2019-11-14T13:12:46.156Z"
+  }
+
+result: |
+  {
+    "action": "index",
+    "controller": "MetricsController",
+    "correlation_id": "c01ce2c1-d9e3-4e69-bfa3-b27e50af0268",
+    "cpu_s": 0.05,
+    "db_duration_s": 0,
+    "duration_s": 0.0459,
+    "format": "html",
+    "method": "GET",
+    "path": "/-/metrics",
+    "remote_ip": "1.1.1.1",
+    "status": 200,
+    "tag": "test",
+    "time": "2019-11-14T13:12:46.156Z",
+    "view_duration_s": 0.00039,
+    "p_log_type": "Custom.SampleLog.V1",
+    "p_row_id": "acde48001122a480ca9eda991001",
+    "p_event_time": "2019-11-14T13:12:46.156Z",
+    "p_parse_time": "2022-04-04T16:12:41.059224Z",
+    "p_any_ip_addresses": [
+        "1.1.1.1"
+    ]
+  }

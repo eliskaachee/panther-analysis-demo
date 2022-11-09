@@ -1,0 +1,49 @@
+version: 0
+schema: Custom.SampleLog.V1
+fields:
+  - name: action
+    required: true
+    type: string
+  - name: controller
+    required: true
+    type: string
+  - name: correlation_id
+    required: true
+    type: string
+  - name: cpu_s
+    required: true
+    type: float
+  - name: db_duration_s
+    required: true
+    type: bigint
+  - name: duration_s
+    required: true
+    type: float
+  - name: format
+    required: true
+    type: string
+  - name: method
+    required: true
+    type: string
+  - name: path
+    required: true
+    type: string
+  - name: remote_ip
+    required: true
+    type: string
+    indicators:
+      - ip
+  - name: status
+    required: true
+    type: bigint
+  - name: tag
+    required: false
+    type: string
+  - name: time
+    required: true
+    type: timestamp
+    timeFormat: rfc3339
+    isEventTime: true
+  - name: view_duration_s
+    required: true
+    type: float
