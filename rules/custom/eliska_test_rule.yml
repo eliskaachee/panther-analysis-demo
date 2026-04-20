@@ -1,0 +1,10 @@
+AnalysisType: rule
+Filename: eliska_test_rule.py
+RuleID: "Eliska.Test.Rule"
+DisplayName: "Eliska Test Rule"
+Enabled: true
+LogTypes:
+    - AlphaSOC.Alert
+Severity: Medium
+DedupPeriodMinutes: 60
+Threshold: 1
