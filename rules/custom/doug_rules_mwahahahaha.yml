@@ -1,0 +1,10 @@
+AnalysisType: rule
+Filename: doug_rules_mwahahahaha.py
+RuleID: "doug.rules.mwahahahaha"
+DisplayName: "doug rules mwahahahaha"
+Enabled: true
+LogTypes:
+    - AWS.ALB
+Severity: Info
+DedupPeriodMinutes: 60
+Threshold: 1
