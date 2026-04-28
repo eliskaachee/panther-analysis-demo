@@ -1,0 +1,18 @@
+AnalysisType: correlation_rule
+RuleID: "Eliska.TEst.Corelateaga.REulwa"
+DisplayName: "Eliska TEst Corelateaga REulwa"
+Enabled: true
+Severity: Medium
+Detection:
+    - Group: # Create a list of rules or signals to correlate (order doesn't matter)
+        - ID: MyFirstRule
+          RuleID: Eliska.Test.Simple.Rule
+          MinMatchCount: 1
+          # MaxMatchCount:
+          # Absence: true # makes sure the step did not happen
+      EventEvaluationOrder: Chronological
+      LookbackWindowMinutes: 60 # the amount of time this correlation rule should lookback over when evaluating rule and signal matches
+      Schedule:
+        RateMinutes: 15
+        # CronExpression: # set if you need a schedule other than minutes
+        TimeoutMinutes: 2
