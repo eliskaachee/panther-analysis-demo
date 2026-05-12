@@ -1,0 +1,12 @@
+AnalysisType: correlation_rule
+RuleID: "ELiska.Test.Rule"
+DisplayName: "ELiska Test Rule"
+Enabled: true
+Severity: Medium
+Detection:
+    - Group: # Create a list of rules or signals to correlate (order doesn't matter)
+        - ID: MyFirstRule
+          RuleID: Eliska.Test.For.Real
+          MinMatchCount: 1
+          # MaxMatchCount:
+          # Absence: true # makes sure the step did not happen
