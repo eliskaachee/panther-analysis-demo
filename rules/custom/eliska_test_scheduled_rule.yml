@@ -1,0 +1,10 @@
+AnalysisType: scheduled_rule
+Filename: eliska_test_scheduled_rule.py
+RuleID: "Eliska.Test.Scheduled.Rule"
+DisplayName: "Eliska Test Scheduled Rule"
+Enabled: true
+Severity: High
+DedupPeriodMinutes: 60
+Threshold: 1
+ScheduledQueries:
+    - Query.Okta.ADAgentTokenAbuseBehavioral
