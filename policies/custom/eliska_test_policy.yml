@@ -1,0 +1,8 @@
+AnalysisType: policy
+Filename: eliska_test_policy.py
+PolicyID: "Eliska.Test.Policy"
+DisplayName: "Eliska Test Policy"
+Enabled: true
+ResourceTypes:
+    - AWS.CloudTrail
+Severity: High
