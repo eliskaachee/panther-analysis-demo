@@ -1,0 +1,9 @@
+AnalysisType: datamodel
+LogTypes:
+    - AWS.BedrockModelInvocation
+DataModelID: "asdf"
+DisplayName: "adsf"
+Enabled: true
+Mappings:
+    - Name: sdfg
+      Path: sdfg
