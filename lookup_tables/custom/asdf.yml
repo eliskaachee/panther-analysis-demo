@@ -1,0 +1,6 @@
+AnalysisType: lookup_table
+LookupName: "asdf"
+Enabled: true
+LogTypeMap:
+    PrimaryKey: objectRef
+    AssociatedLogTypes: []
