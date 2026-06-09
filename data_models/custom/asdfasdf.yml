@@ -1,0 +1,9 @@
+AnalysisType: datamodel
+LogTypes:
+    - AWS.AuroraMySQLAudit
+DataModelID: "asdfasdf"
+DisplayName: "Test"
+Enabled: true
+Mappings:
+    - Name: dfd
+      Path: sfsfsf
