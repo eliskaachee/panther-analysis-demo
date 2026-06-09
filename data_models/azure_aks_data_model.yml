@@ -2,7 +2,7 @@ AnalysisType: datamodel
 LogTypes:
   - Azure.MonitorActivity
 DataModelID: "Standard.Azure.AKS.Audit"
-DisplayName: "Azure AKS Audit"
+DisplayName: "Azure AKS Audits"
 Filename: azure_aks_data_model.py
 Enabled: true
 Mappings:
