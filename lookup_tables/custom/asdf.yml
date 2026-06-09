@@ -1,0 +1,8 @@
+AnalysisType: lookup_table
+LookupName: "asdf"
+Enabled: true
+LogTypeMap:
+    PrimaryKey: access_key_id
+    AssociatedLogTypes:
+        - LogType: AWS.AuroraMySQLAudit
+          Selectors: []
