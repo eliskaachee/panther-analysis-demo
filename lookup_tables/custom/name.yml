@@ -1,0 +1,6 @@
+AnalysisType: lookup_table
+LookupName: "name"
+Enabled: true
+LogTypeMap:
+    PrimaryKey: level
+    AssociatedLogTypes: []
