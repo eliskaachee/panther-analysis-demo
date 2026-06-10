@@ -1,5 +1,7 @@
 AnalysisType: global
 Filename: panther_auth0_helpers.py
 GlobalID: "panther_auth0_helpers"
-Description: >
+Description: >-
   Global helpers for Auth0 detections
+
+  asdf
