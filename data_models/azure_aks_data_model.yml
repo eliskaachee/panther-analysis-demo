@@ -1,6 +1,6 @@
 AnalysisType: datamodel
 LogTypes:
-  - Azure.MonitorActivity
+  - Auth0.Events
 DataModelID: "Standard.Azure.AKS.Audit"
 DisplayName: "Azure AKS Audit"
 Filename: azure_aks_data_model.py
