@@ -1,0 +1,9 @@
+AnalysisType: datamodel
+LogTypes:
+    - Okta.Users
+DataModelID: "123123123"
+DisplayName: "JG Test Data Model"
+Enabled: true
+Mappings:
+    - Name: User Name
+      Path: username
