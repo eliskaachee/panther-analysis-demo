@@ -1,0 +1,53 @@
+AnalysisType: rule
+Filename: anthropic_activity_organization_settings_updated_copy.py
+RuleID: "Anthropic.Activity.Organization.Settings.Updated_copy"
+DisplayName: "Anthropic Organization Settings Updated (Copy)"
+Enabled: false
+LogTypes:
+    - Anthropic.Activity
+Tags:
+    - Anthropic
+    - Configuration
+Severity: Medium
+Reports:
+    MITRE ATT&CK:
+        - TA0005:T1562
+Description: |
+    Detects when organization-wide settings are modified in Anthropic. These changes can affect security posture for all users (e.g., SSO configuration, data retention, access controls). The updates field identifies which settings were changed.
+DedupPeriodMinutes: 60
+Threshold: 1
+Runbook: |
+    1. Find all Anthropic.Activity events by actor:email_address in the 6 hours before and after the alert to understand what other administrative actions they performed
+    2. Check if actor:email_address has performed claude_organization_settings_updated events in the past 90 days to determine if this is routine admin activity or a first-time action
+    3. Check if actor:ip_address is associated with known VPN/proxy services or matches previously seen IP addresses for this actor
+Tests:
+    - Name: Non-matching event type
+      ExpectedResult: false
+      Log:
+        actor:
+            email_address: user@example.com
+            ip_address: 10.0.0.2
+            type: user_actor
+            user_id: user_01DEF
+        created_at: "2026-04-29T09:14:15Z"
+        id: activity_01DEF456
+        organization_id: org_01XYZ
+        type: claude_user_settings_updated
+    - Name: Org settings updated with updates field
+      ExpectedResult: true
+      Log:
+        actor:
+            email_address: admin@example.com
+            ip_address: 10.0.0.1
+            type: user_actor
+            user_agent: Mozilla/5.0
+            user_id: user_01ABC
+        created_at: "2026-04-29T09:14:15Z"
+        id: activity_01ABC123
+        organization_id: org_01XYZ
+        type: claude_organization_settings_updated
+        updates:
+            - current_value:
+                - org_name: example-org
+                  type: github
+              type: vcs_connections
