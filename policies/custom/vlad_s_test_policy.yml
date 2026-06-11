@@ -1,0 +1,8 @@
+AnalysisType: policy
+Filename: vlad_s_test_policy.py
+PolicyID: "Vlad's.test.policy"
+DisplayName: "Vlad's test policy"
+Enabled: true
+ResourceTypes:
+    - AWS.PasswordPolicy
+Severity: Medium
