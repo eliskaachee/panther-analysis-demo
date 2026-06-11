@@ -1,0 +1,19 @@
+AnalysisType: rule
+RuleID: "JG.Create.PR.Detection.Roast"
+DisplayName: "JG Create PR Detection Roast"
+Enabled: true
+LogTypes:
+    - AWS.S3ServerAccess
+Severity: High
+DedupPeriodMinutes: 60
+Threshold: 1
+Detection:
+    - All:
+        - KeyPath: bucket
+          Condition: IsNotNullOrEmpty
+DynamicSeverities:
+    - ChangeTo: MEDIUM
+      Conditions:
+        - KeyPath: p_event_time
+          Condition: IsNotNullOrEmpty
+          Value: ''
