@@ -4,7 +4,6 @@ ACTIONS = [
     "CustomCertificateAuthoritySet",
 ]
 
-
 def rule(event):
 
     action = event.get("operation_name", "<NO_OPERATION_NAME>")
