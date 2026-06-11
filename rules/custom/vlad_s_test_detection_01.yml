@@ -1,0 +1,14 @@
+AnalysisType: rule
+RuleID: "Vlad's.test.detection.01"
+DisplayName: "Vlad's test detection 01"
+Enabled: false
+LogTypes:
+    - Anthropic.Activity
+Severity: High
+DedupPeriodMinutes: 60
+Threshold: 1
+Detection:
+    - All:
+        - KeyPath: actor.user_agent
+          Condition: StartsWith
+          Value: hax0r
