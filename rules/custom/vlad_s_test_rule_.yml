@@ -1,0 +1,10 @@
+AnalysisType: rule
+Filename: vlad_s_test_rule_.py
+RuleID: "Vlad's.Test.Rule."
+DisplayName: "Vlad's Test Rule."
+Enabled: true
+LogTypes:
+    - Anthropic.Activity
+Severity: Low
+DedupPeriodMinutes: 60
+Threshold: 1
