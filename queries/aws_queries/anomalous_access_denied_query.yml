@@ -16,3 +16,8 @@ QueryName: "Anomalous AccessDenied Requests"
 Schedule:
   RateMinutes: 1440
   TimeoutMinutes: 5
+EmailConfig:
+  PreferAttachment: false
+  Recipients:
+    - eliska.achee@panther.com
+  SendEmpty: false
