@@ -1,6 +1,6 @@
 AnalysisType: datamodel
 LogTypes:
-  - Okta.SystemLog
+  - OCSF.WinRegistryKeyInfo
 DataModelID: "Standard.Okta.SystemLog"
 DisplayName: "Okta System Log"
 Filename: okta_data_model.py
