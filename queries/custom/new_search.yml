@@ -1,0 +1,8 @@
+AnalysisType: saved_query
+QueryName: "New Search"
+Description: descriptioin
+Query: |-
+    select *
+    from panther_logs.public
+Tags:
+    - test
