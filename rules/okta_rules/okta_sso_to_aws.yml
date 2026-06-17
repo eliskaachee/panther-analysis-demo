@@ -3,12 +3,14 @@ Filename: okta_sso_to_aws.py
 RuleID: "Okta.SSO.to.AWS"
 DisplayName: "SIGNAL - Okta SSO to AWS"
 Enabled: true
-CreateAlert: false
 LogTypes:
     - Okta.SystemLog
+    - Anomali.Indicator
 Severity: Info
 DedupPeriodMinutes: 60
 Threshold: 1
+InlineFilters:
+    - All: []
 Tests:
     - Name: AWS SSO via Okta
       ExpectedResult: true
@@ -57,3 +59,4 @@ Tests:
             type: WEB
         uuid: 35cae732-21bd-11ef-a011-dd05aa53a11a
         version: "0"
+CreateAlert: false
