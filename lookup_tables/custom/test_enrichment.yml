@@ -1,0 +1,9 @@
+AnalysisType: lookup_table
+LookupName: "test_enrichment"
+Description: My Test Description
+Enabled: true
+LogTypeMap:
+    PrimaryKey: requestObject
+    AssociatedLogTypes:
+        - LogType: AWS.AuroraMySQLAudit
+          Selectors: []
