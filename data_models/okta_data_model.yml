@@ -14,3 +14,5 @@ Mappings:
     Path: $.client.ipAddress
   - Name: user_agent
     Path: $.client.userAgent.rawUserAgent
+  - Name: asdf
+    Path: asdf
