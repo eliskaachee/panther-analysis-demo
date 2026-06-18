@@ -1,0 +1,9 @@
+AnalysisType: scheduled_query
+QueryName: "Test Query Name"
+Description: This is a test
+Query: select 1 as onc union all select 1 as one
+Schedule:
+    RateMinutes: 1440
+    TimeoutMinutes: 1
+Tags:
+    - test
