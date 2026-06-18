@@ -1,0 +1,159 @@
+AnalysisType: rule
+Filename: aws_console_rootloginwithoutmfa.py
+RuleID: "AWS.Console.RootLoginWithoutMFA"
+DisplayName: "AWS Root Console Login Without MFA"
+Enabled: true
+LogTypes:
+    - AWS.CloudTrail
+Severity: Critical
+Description: Detects when the AWS root account successfully logs into the console without multi-factor authentication. Root credentials have unrestricted access to all AWS resources and billing. A successful root login without MFA is a critical security event that may indicate compromised credentials, a security control bypass, or a policy violation — and warrants immediate investigation.
+DedupPeriodMinutes: 15
+Threshold: 1
+Runbook: |-
+    ## AWS Root Console Login Without MFA
+
+    **Severity: CRITICAL** — Root has unrestricted access to all AWS services, billing, and account closure.
+
+    ---
+
+    ## Immediate Actions
+
+    1. **Verify legitimacy** — Contact the AWS account owner immediately. Root logins should be extremely rare and pre-approved. Check for a change ticket or oncall justification.
+    2. **Review root account activity** — Check CloudTrail for all actions taken by the root account in the same session (same `sourceIPAddress`, same `eventTime` window).
+    3. **Check the source IP** — Confirm `sourceIPAddress` is from a known corporate IP range or VPN. An unrecognized IP is a strong indicator of compromise.
+
+    ## Escalate Immediately If
+
+    - Login originates from an unrecognized IP or foreign country
+    - No change ticket / business justification exists
+    - Any write-level API calls were made in the same session (check [Root Account Activity](https://web-752728174.us-west-2.elb.amazonaws.com/build/detections/rules/AWS.Root.Activity/))
+    - This is accompanied by a password or MFA device change
+
+    ## If Compromise is Confirmed
+
+    1. Enable MFA on the root account immediately
+    2. Rotate root account credentials (password)
+    3. Review and revoke any root-created access keys
+    4. Notify the security team and follow the incident response playbook
+
+    ## Known-Good Patterns
+
+    - Root logins should virtually never occur in production accounts; any login warrants scrutiny
+    - Legitimate root activities: billing updates, account recovery, enabling/disabling AWS regions
+
+    ## AI Pivot Queries
+
+    - Search `AWS.CloudTrail` for `userIdentity.type=Root` in the same account, ±30 min around `eventTime`
+    - Search `AWS.CloudTrail` for `eventName=UpdateLoginProfile OR CreateAccessKey OR DeleteVirtualMFADevice` around the same time
+Reference: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html
+Tests:
+    - Name: Non-Login Event - Should Not Trigger
+      ExpectedResult: false
+      Log:
+        awsRegion: us-east-1
+        eventName: DescribeInstances
+        eventSource: ec2.amazonaws.com
+        p_log_type: AWS.CloudTrail
+        recipientAccountId: "123456789012"
+        responseElements: null
+        userIdentity:
+            accountId: "123456789012"
+            arn: arn:aws:iam::123456789012:root
+            type: Root
+    - Name: Root Login WITH MFA - Should Not Trigger
+      ExpectedResult: false
+      Mocks:
+        - objectName: geoinfo_from_ip_formatted
+          returnValue: 203.0.113.10 in New York, NY in USA
+      Log:
+        additionalEventData:
+            LoginTo: https://console.aws.amazon.com/console/
+            MFAUsed: "Yes"
+            MobileVersion: "No"
+        awsRegion: us-east-1
+        eventName: ConsoleLogin
+        eventSource: signin.amazonaws.com
+        eventTime: "2025-01-15T10:00:00Z"
+        p_log_type: AWS.CloudTrail
+        recipientAccountId: "123456789012"
+        responseElements:
+            ConsoleLogin: Success
+        sourceIPAddress: 203.0.113.10
+        userAgent: Mozilla/5.0
+        userIdentity:
+            accountId: "123456789012"
+            arn: arn:aws:iam::123456789012:root
+            principalId: "123456789012"
+            type: Root
+    - Name: Root Login WITHOUT MFA - Should Trigger
+      ExpectedResult: true
+      Mocks:
+        - objectName: geoinfo_from_ip_formatted
+          returnValue: 198.51.100.77 in Unknown Location
+      Log:
+        additionalEventData:
+            LoginTo: https://console.aws.amazon.com/console/
+            MFAUsed: "No"
+            MobileVersion: "No"
+        awsRegion: us-east-1
+        eventName: ConsoleLogin
+        eventSource: signin.amazonaws.com
+        eventTime: "2025-01-15T03:47:22Z"
+        p_log_type: AWS.CloudTrail
+        recipientAccountId: "123456789012"
+        responseElements:
+            ConsoleLogin: Success
+        sourceIPAddress: 198.51.100.77
+        userAgent: Mozilla/5.0
+        userIdentity:
+            accountId: "123456789012"
+            arn: arn:aws:iam::123456789012:root
+            principalId: "123456789012"
+            type: Root
+    - Name: Root Login Failed - Should Not Trigger
+      ExpectedResult: false
+      Mocks:
+        - objectName: geoinfo_from_ip_formatted
+          returnValue: 198.51.100.77 in Unknown Location
+      Log:
+        additionalEventData:
+            LoginTo: https://console.aws.amazon.com/console/
+            MFAUsed: "No"
+            MobileVersion: "No"
+        awsRegion: us-east-1
+        eventName: ConsoleLogin
+        eventSource: signin.amazonaws.com
+        eventTime: "2025-01-15T03:50:00Z"
+        p_log_type: AWS.CloudTrail
+        recipientAccountId: "123456789012"
+        responseElements:
+            ConsoleLogin: Failure
+        sourceIPAddress: 198.51.100.77
+        userAgent: Mozilla/5.0
+        userIdentity:
+            accountId: "123456789012"
+            arn: arn:aws:iam::123456789012:root
+            principalId: "123456789012"
+            type: Root
+    - Name: IAM User Login Without MFA - Should Not Trigger (different detection)
+      ExpectedResult: false
+      Log:
+        additionalEventData:
+            LoginTo: https://console.aws.amazon.com/console/
+            MFAUsed: "No"
+            MobileVersion: "No"
+        awsRegion: us-east-1
+        eventName: ConsoleLogin
+        eventSource: signin.amazonaws.com
+        eventTime: "2025-01-15T09:00:00Z"
+        p_log_type: AWS.CloudTrail
+        recipientAccountId: "123456789012"
+        responseElements:
+            ConsoleLogin: Success
+        sourceIPAddress: 203.0.113.20
+        userAgent: Mozilla/5.0
+        userIdentity:
+            accountId: "123456789012"
+            arn: arn:aws:iam::123456789012:user/dev-user
+            type: IAMUser
+            userName: dev-user
