@@ -1,0 +1,6 @@
+AnalysisType: saved_query
+QueryName: "Test sdfg"
+Description: sdfgsdf
+Query: select 1 as onc union all select 1 as one
+Tags:
+    - TestTest
