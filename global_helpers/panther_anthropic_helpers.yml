@@ -1,5 +1,4 @@
 AnalysisType: global
 Filename: panther_anthropic_helpers.py
 GlobalID: "panther_anthropic_helpers"
-Description: >
-  Used to define global helpers and variables for Anthropic Activity events.
+Description: "Used to define global helpers and variables for Anthropic Activity events.  "
