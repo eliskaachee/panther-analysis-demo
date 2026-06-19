@@ -1,0 +1,10 @@
+AnalysisType: rule
+Filename: eliska_test_rule_5.py
+RuleID: "Eliska.Test.Rule.5"
+DisplayName: "Eliska Test Rule 5"
+Enabled: true
+LogTypes:
+    - Anomali.Indicator
+Severity: High
+DedupPeriodMinutes: 60
+Threshold: 1
