@@ -4,7 +4,7 @@ from panther_aws_helpers import aws_cloudtrail_success, aws_rule_context
 KMS_LOSS_EVENTS = {"DisableKey", "ScheduleKeyDeletion"}
 KMS_KEY_TYPE = "AWS::KMS::Key"
 
-
+# This is a change
 def rule(event):
     return aws_cloudtrail_success(event) and event.get("eventName") in KMS_LOSS_EVENTS
 
