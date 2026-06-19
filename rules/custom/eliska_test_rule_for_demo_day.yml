@@ -1,0 +1,10 @@
+AnalysisType: correlation_rule
+RuleID: "Eliska.Test.Rule.For.Demo.Day"
+DisplayName: "Eliska Test Rule For Demo Day"
+Enabled: true
+Severity: Medium
+Detection:
+    - Group:
+        - ID: MyFirstRule
+          RuleID: Eliska.Test.Simple.Rule
+          MinMatchCount: 1
