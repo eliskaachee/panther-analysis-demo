@@ -1,0 +1,10 @@
+AnalysisType: rule
+Filename: atest.py
+RuleID: "atest"
+DisplayName: "atest"
+Enabled: true
+LogTypes:
+    - AlphaSOC.Alert
+Severity: High
+DedupPeriodMinutes: 60
+Threshold: 1
