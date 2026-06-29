@@ -11,7 +11,6 @@ PackDefinition:
     - Standard.AWS.ALB
     - Standard.AWS.CloudTrail
     - Standard.AWS.VPCFlow
-    - Standard.Azure.AKS.Audit
     - Standard.Azure.Audit.SignIn
     - Standard.Box.Event
     - Standard.Cloudflare.Firewall

@@ -76,7 +76,6 @@ PackDefinition:
     - AWS.IAM.User.MFA
     - AWS.IAMUser.ReconAccessDenied
     - AWS.Password.Unused
-    - AWS.PasswordPolicy.ComplexityGuidelines
     - AWS.PasswordPolicy.PasswordAgeLimit
     - AWS.PasswordPolicy.PasswordReuse
     - AWS.Potentially.Stolen.Service.Role.Scheduled
