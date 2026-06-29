@@ -1,7 +1,7 @@
 AnalysisType: correlation_rule
-RuleID: "AWS.Administrative.IAM.User.Created"
-DisplayName: "AWS.Administrative.IAM.User.Created"
-Enabled: true
+RuleID: "AWS.Administrative.IAM.User.Created.Group"
+DisplayName: "AWS Administrative IAM User Created"
+Enabled: false
 Severity: Info
 Tags:
   - Beta
@@ -11,19 +11,18 @@ Reports:
   MITRE ATT&CK:
     - TA0006:T1078
 Detection:
-    - Sequence:
+    - Group:
         - ID: CreateUser
           RuleID: AWS.IAM.CreateUser
         - ID: AttachAdminUserPolicy
           RuleID: AWS.IAM.AttachAdminUserPolicy
-      Transitions:
-        - ID: CreateUser FOLLOWED BY AttachAdminUserPolicy
-          From: CreateUser
-          To: AttachAdminUserPolicy
-          WithinTimeFrameMinutes: 60
-          Match:
-            - On: p_alert_context.request_username
-      LookbackWindowMinutes: 2160
+      MatchCriteria:
+        field_name:
+          - GroupID: CreateUser
+            Match: p_alert_context.request_username
+          - GroupID: AttachAdminUserPolicy
+            Match: p_alert_context.request_username
+      LookbackWindowMinutes: 1800
       Schedule:
         RateMinutes: 1440
         TimeoutMinutes: 5
@@ -40,7 +39,7 @@ Tests:
           Matches:
             p_alert_context.request_username:
               'new-user':
-                - "2024-06-01T11:00:01Z"
+                - "2024-06-01T10:30:01Z"
     - Name: User Created, Not Followed By Admin Policy Attachment
       ExpectedResult: false
       RuleOutputs:

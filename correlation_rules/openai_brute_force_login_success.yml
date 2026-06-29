@@ -1,7 +1,7 @@
 AnalysisType: correlation_rule
-RuleID: "OpenAI.BruteForce.Login.Success"
+RuleID: "OpenAI.BruteForce.Login.Success.Group"
 DisplayName: "OpenAI Brute Force Login Success"
-Enabled: true
+Enabled: false
 Severity: High
 Description: |
   Detects successful credential stuffing or brute force attacks against OpenAI accounts.
@@ -25,23 +25,22 @@ Reports:
     - TA0006:T1110.003  # Password Spraying
     - TA0006:T1110.004  # Credential Stuffing
 Detection:
-  - Sequence:
+  - Group:
       - ID: Multiple Failed Logins
         RuleID: OpenAI.Login.Failed
         MinMatchCount: 5
       - ID: Successful Login
         RuleID: OpenAI.Login.Success
-    Transitions:
-      - ID: Multiple Failed Logins FOLLOWED BY Successful Login
-        From: Multiple Failed Logins
-        To: Successful Login
-        WithinTimeFrameMinutes: 30
-        Match:
-          - On: p_any_emails
+    MatchCriteria:
+      field_name:
+        - GroupID: Multiple Failed Logins
+          Match: p_any_emails
+        - GroupID: Successful Login
+          Match: p_any_emails
     Schedule:
       RateMinutes: 1440
       TimeoutMinutes: 5
-    LookbackWindowMinutes: 2160
+    LookbackWindowMinutes: 1800
 Tests:
   - Name: "5 Failed Logins FOLLOWED BY Successful Login"
     ExpectedResult: true
@@ -76,7 +75,7 @@ Tests:
         Matches:
           p_any_emails:
             "user@company.com": [6]
-  - Name: "5 Failed Logins FOLLOWED BY Success After 35 Minutes"
+  - Name: "5 Failed Logins FOLLOWED BY Success Outside Lookback Window"
     ExpectedResult: false
     RuleOutputs:
       - ID: Multiple Failed Logins
@@ -86,7 +85,7 @@ Tests:
       - ID: Successful Login
         Matches:
           p_any_emails:
-            "user@company.com": [45]
+            "user@company.com": [1860]
   - Name: "Multiple Users - Only One Triggers"
     ExpectedResult: true
     RuleOutputs:
