@@ -1,0 +1,9 @@
+AnalysisType: datamodel
+LogTypes:
+    - AWS.BedrockModelInvocation
+DataModelID: "testtesttest"
+DisplayName: "Eliska Test"
+Enabled: true
+Mappings:
+    - Name: test
+      Path: test
