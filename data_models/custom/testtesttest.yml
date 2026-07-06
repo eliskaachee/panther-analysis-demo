@@ -1,0 +1,9 @@
+AnalysisType: datamodel
+LogTypes:
+    - AWS.AuroraMySQLAudit
+DataModelID: "testtesttest"
+DisplayName: "Eliska Test"
+Enabled: true
+Mappings:
+    - Name: test
+      Path: themosttest
